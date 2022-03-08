@@ -17,6 +17,17 @@ while True:
         if message in command:
             response = bot_dict[message]
             break
+    if '和暦' in command:
+        wareki, year_str = command.split()
+        year = int(year_str)
+        if year >= 2019:
+            reiwa = year - 2018
+            response = f'西暦{year}年ハ、令和{reiwa}年デス'
+        elif year >= 1989:
+            heisei = year - 1988
+            response = f'西暦{year}年ハ、平成{heisei}年デス'
+        else:
+            response = f'西暦{year}年ハ、平成ヨリ前デス'
 
     if not response:
         response = '何ヲ言ッテルカ、ワカラナイ'
