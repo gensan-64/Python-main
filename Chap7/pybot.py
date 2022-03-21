@@ -10,7 +10,7 @@ def len_command(command):
 
 def wareki_command(command):
     wareki, year_str = command.split()
-    try:
+    if year_str.isdigit():
         year = int(year_str)
         if year >= 2019:
             reiwa = year - 2018
@@ -20,7 +20,7 @@ def wareki_command(command):
             response = f'西暦{year}年ハ、平成{heisei}年デス'
         else:
             response = f'西暦{year}年ハ、平成ヨリ前デス'
-    except ValueError:
+    else:
         response = '数値ヲ指定シテクダサイ'
     return response
 
