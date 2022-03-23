@@ -39,31 +39,36 @@ for line in lines:
 while True:
     command = input('pybot> ')
     response = ''
-    for message in bot_dict:
-        if message in command:
-            response = bot_dict[message]
+    try:
+        for message in bot_dict:
+            if message in command:
+                response = bot_dict[message]
+                break
+
+        if '和暦' in command:
+            response = wareki_command(command)
+        if '長さ' in command:
+            response = len_command(command)
+        if '干支' in command:
+            response = eto_command(command)
+        if '選ぶ' in command:
+            response = choice_command(command)
+        if 'さいころ' in command:
+            response = dice_command()
+        if '今日' in command:
+            response = today_command()
+        if '現在' in command:
+            response = now_command()
+        if '曜日' in command:
+            response = weekday_command(command)
+
+        if not response:
+            response = '何ヲ言ッテルカ、ワカラナイ'
+        print(response)
+
+        if 'さようなら' in command:
             break
-
-    if '和暦' in command:
-        response = wareki_command(command)
-    if '長さ' in command:
-        response = len_command(command)
-    if '干支' in command:
-        response = eto_command(command)
-    if '選ぶ' in command:
-        response = choice_command(command)
-    if 'さいころ' in command:
-        response = dice_command()
-    if '今日' in command:
-        response = today_command()
-    if '現在' in command:
-        response = now_command()
-    if '曜日' in command:
-        response = weekday_command(command)
-
-    if not response:
-        response = '何ヲ言ッテルカ、ワカラナイ'
-    print(response)
-
-    if 'さようなら' in command:
-        break
+    except Exception as e:
+        print('予期セヌ エラーガ 発生シマシタ')
+        print(f'* 種類: {type(e)}')
+        print(f'* 内容: {e}')
